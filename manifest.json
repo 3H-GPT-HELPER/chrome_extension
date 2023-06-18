@@ -1,0 +1,37 @@
+{
+    "name":"first extension",
+    "description":"gogo 3H",
+    "version":"1.0",
+    "manifest_version":3,
+
+    "background": {
+        "service_worker": "background.js"
+      },
+    "permissions": [
+        "webNavigation",
+        "storage","activeTab","scripting","tabs","webRequest"]
+    ,
+
+    "action":{
+        "default_title":"chatGpt-Study Helper",
+        "default_popup":"popup.html"
+    
+    },
+
+    "host_permissions":[
+        "https://*/*","https://*/*/*"
+    ],
+    "content_scripts":[
+        {
+            "matches":["https://*/*"],
+            "js":["content.js"]
+        }
+    ],
+    "externally_connectable": {
+        "ids": ["cbcoljlaabhoangpnljoogpgbifdpddh"],
+        "matches": ["https://*/*"],
+        "accepts_tls_channel_id": false
+      }
+
+}
+
