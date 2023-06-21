@@ -5,14 +5,19 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
             var markdownDivs=document.querySelectorAll('.markdown');
 
             for (var i = 0; i < markdownDivs.length; i++) {
+             
                 var markdownDiv=markdownDivs[i];
                 var button = document.createElement('button');
                 //button.textContent = 'Button ' + (i + 1);
+                
 
-                button.textContent='3H🧸💙💕🧚‍♂️ btn'+(i+1);
-                button.style.backgroundColor='blue';
+                button.textContent='check💫';
+                
+                
+                button.style.backgroundColor='#5039E0';
                 button.style.color='white';
                 button.style.padding='10px';
+                
                 markdownDiv.appendChild(button);
                 
                 // 클로저 생성
@@ -44,6 +49,7 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                     })
                       .then(response => response.json())
                       .then(data => {
+                        alert('send to helper site!');
                         console.log(data);
                       })
                       .catch(error => {

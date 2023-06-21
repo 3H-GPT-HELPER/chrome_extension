@@ -1,5 +1,5 @@
 {
-    "name":"first extension",
+    "name":"chatGpt Helper",
     "description":"gogo 3H",
     "version":"1.0",
     "manifest_version":3,
@@ -31,7 +31,15 @@
         "ids": ["cbcoljlaabhoangpnljoogpgbifdpddh"],
         "matches": ["https://*/*"],
         "accepts_tls_channel_id": false
-      }
+      },
+
+    "icons":{
+        "128":"icons/extensionIcon.png"
+
+    }
+      
+
+    
 
 }
 
