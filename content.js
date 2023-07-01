@@ -8,9 +8,6 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
              
                 var markdownDiv=markdownDivs[i];
                 var button = document.createElement('button');
-                //button.textContent = 'Button ' + (i + 1);
-                
-
                 button.textContent='check💫';
                 
                 
@@ -60,53 +57,6 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
               
                 
               }
-              
-
-            // for(var i=0;i<markdownDivs.length;i++){
-            //     var markdownDiv=markdownDivs[i];
-            //     //버튼 element 생성
-            //     var button=document.createElement('button');
-            //     button.textContent='3H🧸💙💕🧚‍♂️';
-            //     button.style.backgroundColor='blue';
-            //     button.style.color='white';
-            //     button.style.padding='10px';
-            //     markdownDiv.appendChild(button);
-
-            //     button.addEventListener('click',function(){
-            //         //console.log("button clicked!");
-              
-            //         var pTagContents=[];
-            //         console.log(markdownDiv);
-            //         // var ptags=markdownDiv.querySelectorAll('p');
-            //         var ptags=Array.from(markdownDiv.querySelectorAll('p'));
-            //         console.log(ptags);
-
-            //         ptags.forEach(function(p){
-            //             console.log("p add!");
-            //             pTagContents.push(p.textContent);
-            //         });
-            //         console.log(pTagContents);
-
-            //         //우리사이트로 fetch 보내기
-            //         fetch("http://127.0.0.1:8000/proxy",{
-            //             method:'POST',
-            //             headers:{
-            //                 'Content-Type':'application/json;charset=UTF-8',
-            //                 'X-CSRFToken': getCookie('csrftoken'), 
-            //             },
-            //             body:JSON.stringify({
-            //                 data:pTagContents,
-            //             }),
-            //         })
-            //         .then(response=>response.json())
-            //         .then(data=>{
-            //             console.log(data);
-            //         })
-            //         .catch(error=>{
-            //             console.error('Error:',error);
-            //         });
-            //     });
-            //}//for문 끝
 
             sendResponse({req:markdownDiv});
             }
