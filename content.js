@@ -5,34 +5,79 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
             var markdownDivs=document.querySelectorAll('.markdown');
 
             for (var i = 0; i < markdownDivs.length; i++) {
-             
+
+                //make check btn
                 var markdownDiv=markdownDivs[i];
                 var button = document.createElement('button');
                 button.textContent='check💫';
-                
-                
                 button.style.backgroundColor='#5039E0';
                 button.style.color='white';
                 button.style.padding='10px';
                 
                 markdownDiv.appendChild(button);
+
                 
                 // 클로저 생성
                 (function(md,index) {
                   // 이벤트 리스너 추가
                   button.addEventListener('click', function() {
+
+                    //smiliarity 용 답변만
                     var pTagContents = [];
                     var ptags = Array.from(md.querySelectorAll('p'));
-              
+
                     ptags.forEach(function(p) {
                       pTagContents.push(p.textContent);
                     });
+
+                    // 답변+code 통합본
+                    var complexContents=[];
+                      md.childNodes.forEach(function(childNode){
+                        //단순 text
+                        if(childNode.nodeName==='P'){
+                          complexContents+=(childNode.textContent);
+                          complexContents+='\n'
+                        }
+                        
+
+                        //OL 태그
+                        else if(childNode.nodeName==='OL'){
+                         childNode.childNodes.forEach(function(node){
+                            if(node.nodeName==='LI'){
+                              var p=node.querySelector('p')
+                              complexContents+=p.textContent;
+                            }
+                            
+                          })
+                          complexContents+='\n'
+
+                    
+                        }
+
+                        //code
+                        else if(childNode.querySelectorAll('PRE')){
+                          var codeTexts='';
+                          codeElements=Array.from(childNode.querySelectorAll('code[class*="whitespace-pre"]'));
+                          codeElements.forEach(function(codeElement) {
+                            codeElement.childNodes.forEach(function(childNode) {
+                              codeTexts += childNode.textContent;
+             
+                            });
+
+                        })
+
+                        complexContents+=codeTexts;
+                        
+                      }
+                      
+
+                    
+                    })
+              
               
                     // index 값을 사용하여 버튼 식별
                     console.log('Button ' + (index + 1) + ' clicked!');
-                    console.log(pTagContents);
-              
-         
+                    
                     // 우리사이트로 fetch 보내기
                     fetch('http://127.0.0.1:8000/proxy', {
                       method: 'POST',
@@ -41,7 +86,8 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                         'X-CSRFToken': getCookie('csrftoken'),
                       },
                       body: JSON.stringify({
-                        data: pTagContents,
+                        pTagContents: pTagContents,
+                        complexContents:complexContents,
                       }),
                     })
                       .then(response => response.json())
@@ -83,7 +129,6 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 function getHtml(){
     return new Promise(function(resolve,reject){
         chrome.scripting.executeScript({
-            //code:'document.querySelector(".markdown.prose.w-full").innerText'
             code:'document.querySelector("p").innerText'
         },function(result){
 

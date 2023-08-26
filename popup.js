@@ -6,9 +6,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     let btn = document.getElementById('btn');
-    chrome.storage.sync.get('color', ({ color }) => {
-      btn.style.backgroundColor = color;
-    });
+    // chrome.storage.sync.get('color', ({ color }) => {
+    //   btn.style.backgroundColor = color;
+    // });
 
     function setPageBackgroundColor() {
       chrome.storage.sync.get('color', ({ color }) => {
