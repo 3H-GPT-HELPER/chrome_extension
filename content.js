@@ -9,10 +9,18 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                 //make check btn
                 var markdownDiv=markdownDivs[i];
                 var button = document.createElement('button');
+                //button.textContent='check';
+                //button.classList.add("small_button");
+                //button.rel = "stylesheet";
+                //button.type = "text/css";
+                //button.href = "small_button.css";
+
                 button.textContent='check💫';
                 button.style.backgroundColor='#5039E0';
                 button.style.color='white';
                 button.style.padding='10px';
+                button.style.borderRadius = '10px'
+                button.style.transition = "background-color 0.3s";
                 
                 markdownDiv.appendChild(button);
 
@@ -21,6 +29,8 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                 (function(md,index) {
                   // 이벤트 리스너 추가
                   button.addEventListener('click', function() {
+
+                    //button.style.backgroundColor = '#FF0072';
 
                     //smiliarity 용 답변만
                     var pTagContents = [];
