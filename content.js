@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                   // 이벤트 리스너 추가
                   button.addEventListener('click', function() {
 
-                    //button.style.backgroundColor = '#FF0072';
+                    this.style.backgroundColor = '#FF0072';
 
                     //smiliarity 용 답변만
                     var pTagContents = [];
