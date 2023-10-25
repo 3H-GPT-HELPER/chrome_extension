@@ -8,13 +8,26 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 
                 //make check btn
                 var markdownDiv=markdownDivs[i];
-                var button = document.createElement('button');
-                //button.textContent='check';
-                //button.classList.add("small_button");
-                //button.rel = "stylesheet";
-                //button.type = "text/css";
-                //button.href = "small_button.css";
+            
+                //question 추출
+                
+                // markdownDiv의 최상위 div까지 올라감.
+                var topLevelDiv = markdownDiv;
+                while (topLevelDiv && !topLevelDiv.classList.contains('group')) {
+                  topLevelDiv = topLevelDiv.parentElement;
+                }
+              
+                // 최상위 div의 바로 앞에 있는 div에 접근
+                var previousDiv = topLevelDiv.previousElementSibling;
+                var questionText=""
+                
+                if (previousDiv && previousDiv.tagName === 'DIV') {
+                  questionText=previousDiv.textContent;
+                  
+                }
 
+                //btn css
+                var button = document.createElement('button');
                 button.textContent='check💫';
                 button.style.backgroundColor='#5039E0';
                 button.style.color='white';
@@ -79,11 +92,9 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                         complexContents+=codeTexts;
                         
                       }
-                      
 
                     
                     })
-              
               
                     // index 값을 사용하여 버튼 식별
                     console.log('Button ' + (index + 1) + ' clicked!');
@@ -98,6 +109,7 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                       body: JSON.stringify({
                         pTagContents: pTagContents,
                         complexContents:complexContents,
+                        questionText:questionText,
                       }),
                     })
                       .then(response => response.json())
