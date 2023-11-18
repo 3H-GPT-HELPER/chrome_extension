@@ -32,11 +32,11 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                 
                     // markdownDiv의 최상위 div까지 올라감.
                     var topLevelDiv = md;
-                    while (topLevelDiv && !topLevelDiv.classList.contains('group')) {
+                    while (topLevelDiv && !topLevelDiv.classList.contains('text-token-text-primary')) {
                       topLevelDiv = topLevelDiv.parentElement;
                     }
                   
-                    // 최상위 div의 바로 앞에 있는 div에 접근
+                    //최상위 div의 바로 앞에 있는 div에 접근
                     var previousDiv = topLevelDiv.previousElementSibling;
                     var questionText=""
                     
