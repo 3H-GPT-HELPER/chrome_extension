@@ -42,8 +42,10 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
                     
                     if (previousDiv && previousDiv.tagName === 'DIV') {
                       questionText=previousDiv.textContent;
-                      console.log(questionText);
+                      questionText=questionText.slice(3,)
+                      console.log("q",questionText);
                     }
+
 
                     //smiliarity 용 답변만
                     var pTagContents = [];
